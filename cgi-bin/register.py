@@ -4,6 +4,7 @@
 import json
 import cgi, cgitb
 
+#FIXME 共通化
 # FIXME STUB
 # バイナリが画像かチェックする
 def isimage(bin):
@@ -16,13 +17,11 @@ def image_to_feature(image):
     return feature
 
 # FIXME STUB
-# DB検索して結果のリスト(ゲーム名、画像)を返す
-# DBが対応していればこの時点でJSON？
-def search_by(feature):
+# DBにタイトル(ID)・画像・特徴量を登録して結果を1行JSONで返す
+# サイズチェックや重複チェックなどではじかれた場合はJSON自体に情報を記述
+def register(id, image, feature):
     result = [
-        {"title" : feature, "image" : "画像URL1"},
-        {"title" : "サンプル2", "image" : "画像URL2"},
-        {"title" : "サンプル3", "image" : "画像URL3"},
+        {"status" : True, "title" : id, "image" : "画像URL"}
     ]
     # エスケープされる
     return json.dumps(result)
@@ -32,12 +31,16 @@ def search_by(feature):
 print("Content-type: application/json; charset=UTF-8\r\n\r\n")
 
 form = cgi.FieldStorage()
-bin = form["search_file"].value
+title = form["register_title"].value
+id = form["register_title"].value
+# FIXME
+# id = form["register_id"].value
+bin = form["register_file"].value
 
 # バイナリ形式チェック
 if isimage(bin):
     feature = image_to_feature(bin)
-    result = search_by(feature)
+    result = register(id, bin, feature)
 else:
     result = {"error" : "not an image"}
 
