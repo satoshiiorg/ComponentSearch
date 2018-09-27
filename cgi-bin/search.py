@@ -1,49 +1,23 @@
 #!/usr/bin/env python3
 ##!/usr/local/bin/python3
 # coding: utf-8
-import json
+import logic
 import cgi, cgitb
 
-# FIXME STUB
-# バイナリが画像かチェックする
-def isimage(bin):
-    return True
-
-# FIXME STUB
-# 画像の特徴量を計算
-def image_to_feature(image):
-    feature = image.decode(encoding="Shift_JIS")
-    return feature
-
-# FIXME STUB
-# DB検索して結果のリスト(ゲーム名、画像)を返す
-# DBが対応していればこの時点でJSON？
-def search_by(feature):
-    result = [
-        {"title" : feature, "image" : "画像URL1"},
-        {"title" : "サンプル2", "image" : "画像URL2"},
-        {"title" : "サンプル3", "image" : "画像URL3"},
-    ]
-    # エスケープされる
-    return json.dumps(result)
-
-# 基本的にはAPIとして実装
-# リクエストを受けて結果を返すだけ
-print("Content-type: application/json; charset=UTF-8\r\n\r\n")
+# 検索API
 
 form = cgi.FieldStorage()
-bin = form["search_file"].value
+file = form["search_file"].value
 
-# バイナリ形式チェック
-if isimage(bin):
-    feature = image_to_feature(bin)
-    result = search_by(feature)
+# バイナリ形式チェックして特徴量計算して検索
+if logic.isimage(file):
+    feature = logic.image_to_feature(file)
+    result = logic.search_by(feature)
 else:
     result = {"error" : "not an image"}
 
-# print("Content-type: text/plain; charset=UTF-8\r\n\r\n")
-# 備忘のため。text/plainな現状では不要 cgi.escape
-# DBからとってきたテキストと画像をリスト表示
+# 結果を出力
+print("Content-type: application/json; charset=UTF-8\r\n\r\n")
 print(result)
 
 # print(form)
