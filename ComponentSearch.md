@@ -25,3 +25,21 @@ DB/DDL
 特徴量が配列で返るなら (ゲーム, コンポーネント, 特徴量) をPKにして
 多対多で特徴量をマッチングさせゲームでグルーピングして件数順に表示とか
 
+
+BGG/Amazon辺りをAPI使ってクロールしてML
+
+ヒストグラムで絞ってからマッチングするとか？
+でも背景とかコンポーネント丸ごと撮ってるかどうかとかで微妙
+単体でやるのでない限り物体検出はどうしても必要になる
+
+# Cloud9起動時の
+cd ComponentSearch; python3 -m http.server --cgi
+echo "http://$(curl http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null):8000/index.html"
+
+# OpenCVインストールはこれでやった
+sudo pip-3.6 install numpy opencv-python 
+
+# あとで見る
+https://hazm.at/mox/machine-learning/computer-vision/recipes/similar-image-retrieval.html
+とりあえず特徴量ベースでDBなし検索で一致度見てから考える
+
