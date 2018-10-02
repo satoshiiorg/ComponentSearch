@@ -3,7 +3,7 @@
 # ちゃんとビジネス/データアクセス/画像処理で分割する？
 import json
 
-# FIXME STUB
+# TODO STUB
 # バイナリが画像かチェックする
 def isimage(bin):
     return True
