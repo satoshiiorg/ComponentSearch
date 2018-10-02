@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 import logic
-import cgi, cgitb
+import cgi
+# TODO DEBUG
+# import cgitb; cgitb.enable()
 
 # 検索API
-
 form = cgi.FieldStorage()
 file = form["search_file"].value
 

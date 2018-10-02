@@ -2,6 +2,17 @@
 # DBアクセス/画像処理関連の共通ロジック
 # ちゃんとビジネス/データアクセス/画像処理で分割する？
 import json
+from logging import getLogger, StreamHandler, DEBUG
+
+# TODO 後で精査
+logger = getLogger(__name__)
+handler = StreamHandler()
+handler.setLevel(DEBUG)
+logger.setLevel(DEBUG)
+logger.addHandler(handler)
+logger.propagate = False
+def warning(s):
+    logger.warning(s)
 
 # TODO STUB
 # バイナリが画像かチェックする
