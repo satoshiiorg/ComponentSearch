@@ -43,22 +43,29 @@ const resultVue = new Vue({
   }
 });
 
-const searchVue = new Vue({
+// const searchVue = 
+new Vue({
   el: '#search_form',
-  data: {
-    upload_file: null,
-    result: null
-  },
   methods: {
     search_file: function(e) {
       e.preventDefault();
       const params = new FormData();
       params.append('search_file', e.target.files[0]);
       axios.post('/cgi-bin/search.py', params)
-          .then(response => {resultVue.items = response.data; console.log(response.data)});
+          .then(response => resultVue.items = response.data);
     }
   }
 });
+
+// const registerVue = 
+// new Vue({
+//   el: '#register_form',
+//   data: {
+//     title: null
+//   }
+//   // FIXME onSubmit
+// });
+
     </script>
   </body>
 </html>
