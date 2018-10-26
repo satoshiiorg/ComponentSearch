@@ -50,8 +50,9 @@ new Vue({
     search_file: function(e) {
       e.preventDefault();
       const params = new FormData();
+      params.append('action', 'search');
       params.append('search_file', e.target.files[0]);
-      axios.post('/cgi-bin/search.py', params)
+      axios.post('/cgi-bin/api.py', params)
           .then(response => resultVue.items = response.data);
     }
   }

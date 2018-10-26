@@ -5,9 +5,15 @@ import cgi
 # TODO DEBUG
 # import cgitb; cgitb.enable()
 
-# 検索API
+# 統合API
 form = cgi.FieldStorage()
-file = form["search_file"].value
+# TODO フラグで判別
+action = form["action"].value
+if action == "search":
+    file = form["search_file"].value
+else:
+    title = form["register_title"].value
+    file = form["register_file"].value
 
 # バイナリ形式チェックして特徴量計算して検索
 if logic.isimage(file):
