@@ -1,3 +1,4 @@
+# メモ
 
 画像処理関連
 ・OpenCV
@@ -58,7 +59,6 @@ svn export http://svn.apache.org/repos/asf/labs/alike
 cd alike/trunk
 java10だとビルドエラー出る
 ant
-
 scala
 
 
@@ -69,17 +69,8 @@ https://hazm.at/mox/machine-learning/computer-vision/recipes/similar-image-retri
 キーワード: CBIR Content-Based Image Retrieval
 https://www.rondhuit.com/oss%E3%81%AE%E9%A1%9E%E4%BC%BC%E7%94%BB%E5%83%8F%E6%A4%9C%E7%B4%A2%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88-apache-alike-%E3%81%AE%E3%81%94%E7%B4%B9%E4%BB%8B.html
 
-
 # TODO 
 画像で画像検索の略称なんだっけ
 スマホ最適化
 DnDインタフェース
 登録フォーム折りたたみ
-
-# Cloud9起動時の
-cd ComponentSearch; python3 -m http.server --cgi
-echo "http://$(curl http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null):8000/index.html"
-セキュリティ設定というかポート範囲の指定方法間違ってるかも
-もしくはリタリコのIP変わってないか確認
-curlでローカルからはアクセスできるのでたぶんその辺
-

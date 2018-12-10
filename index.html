@@ -10,63 +10,37 @@
     <!-- TODO UIというかデザインは見直す -->
     <h1>ボードゲームコンポーネント検索</h1>
     <p>はぐれたコンポーネントの写真からゲームタイトルを特定できたらいいな、というサービスです。</p>
-    <h2>コンポーネント検索</h2>
-    <form id="search_form">
-      <label for="search_file">画像から検索: </label><input type="file" name="search_file" accept="image/*; capture=camera" v-on:change="search_file" />
-    </form>
-
-    <p>(画像を選択すると自動的に検索されます)</p>
-    <!-- TODO クリックでフォーム開くようにする？ -->
-    <h2>コンポーネント登録</h2>
-    <form id="register_form">
-      <label>画像を登録: <input type="file" name="register_file" accept="image/*; capture=camera" /></label><br />
-      <!-- TODO: サブフォームでマスタから検索できるように  -->
-      <label>ゲームタイトル: <input type="text" name="register_title" placeholder="(ここにタイトルを入力)" required /></label><br />
-      <input type="hidden" name="register_id" value="" />
-      <button type="button" id="register_button">画像を登録</button>
-    </form>
-    <h2>実行結果</h2>
-    <table id="result">
-      <tr v-for="item in items">
-        <td>{{item.title}}</td>
-        <td>{{item.image}}</td>
-      </tr>
-    </table>
-    <!--  スーパーリロードが面倒なのでいったんこっちでやる  -->
-    <!--<script src="controller.js"></script>-->
-    <script>
-
-const resultVue = new Vue({
-  el: "#result",
-  data: {
-    items: []
-  }
-});
-
-// const searchVue = 
-new Vue({
-  el: '#search_form',
-  methods: {
-    search_file: function(e) {
-      e.preventDefault();
-      const params = new FormData();
-      params.append('action', 'search');
-      params.append('search_file', e.target.files[0]);
-      axios.post('/cgi-bin/api.py', params)
-          .then(response => resultVue.items = response.data);
-    }
-  }
-});
-
-// const registerVue = 
-// new Vue({
-//   el: '#register_form',
-//   data: {
-//     title: null
-//   }
-//   // FIXME onSubmit
-// });
-
-    </script>
+    
+    <section>
+      <h2>コンポーネント検索</h2>
+      <form id="search_form">
+        <label for="search_file">画像から検索: </label><input type="file" name="search_file" accept="image/*; capture=camera" v-on:change="search_file" />
+      </form>
+      <p>(画像を選択すると自動的に検索されます)</p>
+    </section>
+    
+    <!-- クリックでフォーム開くようにする？ -->
+    <!-- TODO 未実装なので一旦消しておく -->
+    <section style="display:none">
+      <h2>コンポーネント登録</h2>
+      <form id="register_form">
+        <label>画像を登録: <input type="file" name="register_file" accept="image/*; capture=camera" /></label><br />
+        <!-- TODO: サブフォームでマスタから検索できるように  -->
+        <label>ゲームタイトル: <input type="text" name="register_title" placeholder="(ここにタイトルを入力)" required /></label><br />
+        <input type="hidden" name="register_id" value="" />
+        <button type="button" id="register_button">画像を登録</button>
+      </form>
+    </section>
+    
+    <section>
+      <h2>実行結果</h2>
+      <table id="result">
+        <tr v-for="item in items">
+          <td>{{item.title}}</td>
+          <td>{{item.image}}</td>
+        </tr>
+      </table>
+    </section>
+    <script src="controller.js"></script>
   </body>
 </html>

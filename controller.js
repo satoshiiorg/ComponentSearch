@@ -1,30 +1,36 @@
-import Vue from 'vue';
-import axios from 'axios';
+// import Vue from 'vue';
+// import axios from 'axios';
 
 const resultVue = new Vue({
-  el: '#result',
-  data () {
-    return {
-      info: null
-    };
+  el: "#result",
+  data: {
+    items: []
   }
 });
 
-//TODO ここ入力と出力が別のコンポーネントになるけどどうするのが普通なんだろ
-const searchVue = new Vue({
+// const searchVue = 
+new Vue({
   el: '#search_form',
-  updated () {
-    // const params = new URLSearchParams();
-    // const params = new FormData();
-    // params.append('file', this.files[0]);
-    axios
-      .post('/cgi-bin/search.py')
-      .then(response => (resultVue.info = response));
+  methods: {
+    search_file: function(e) {
+      e.preventDefault();
+      const params = new FormData();
+      params.append('action', 'search');
+      params.append('search_file', e.target.files[0]);
+      axios.post('/cgi-bin/api.py', params)
+          .then(response => resultVue.items = response.data);
+    }
   }
 });
 
-
-
+// const registerVue = 
+// new Vue({
+//   el: '#register_form',
+//   data: {
+//     title: null
+//   }
+//   // FIXME onSubmit
+// });
 
 
 // titleとimage文字列からtr要素を生成

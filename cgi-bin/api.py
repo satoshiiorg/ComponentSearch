@@ -5,22 +5,26 @@ import cgi
 # TODO DEBUG
 # import cgitb; cgitb.enable()
 
-# 統合API
+# フラグで判別
 form = cgi.FieldStorage()
-# TODO フラグで判別
 action = form["action"].value
 if action == "search":
+    # 検索
     file = form["search_file"].value
-else:
+    # バイナリ形式チェックして特徴量計算して検索
+    if logic.isimage(file):
+        feature = logic.image_to_feature(file)
+        result = logic.search_by(feature)
+    else:
+        result = {"error" : "not an image"}
+elif action == "register":
+    # 登録
     title = form["register_title"].value
     file = form["register_file"].value
-
-# バイナリ形式チェックして特徴量計算して検索
-if logic.isimage(file):
-    feature = logic.image_to_feature(file)
-    result = logic.search_by(feature)
+    # TODO 登録処理
+    # result = 
 else:
-    result = {"error" : "not an image"}
+    result = {"error" : "invalid action"}
 
 # 結果を出力
 print("Content-type: application/json; charset=UTF-8\r\n\r\n")
